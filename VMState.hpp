@@ -1,7 +1,7 @@
 #ifndef VMSTATE_HPP
 #define VMSTATE_HPP
 
-typedef unsigned char byte;
+#include "Basic.hpp"
 
 namespace vm
 {
