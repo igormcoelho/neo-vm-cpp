@@ -5,42 +5,56 @@
 
 namespace vm
 {
-    class Boolean : StackItem
+    class Array : StackItem
     {
-        private static readonly byte[] TRUE = { 1 };
-        private static readonly byte[] FALSE = new byte[0];
+    public:
+        std::vector<StackItem*> _array;
 
-        private bool value;
-
-        public Boolean(bool value)
-        {
-            this.value = value;
+        virtual int typeId() {
+          return 0;
         }
 
-        public override bool Equals(StackItem other)
-        {
-            if (ReferenceEquals(this, other)) return true;
-            if (ReferenceEquals(null, other)) return false;
-            Boolean b = other as Boolean;
-            if (b == null)
-                return GetByteArray().SequenceEqual(other.GetByteArray());
-            else
-                return value == b.value;
+        bool IsArray() {
+          return true;
         }
 
-        public override BigInteger GetBigInteger()
+        Array(std::vector<StackItem*> value)
         {
-            return value ? BigInteger.One : BigInteger.Zero;
+            this->_array = value;
         }
 
-        public override bool GetBoolean()
+        bool Equals(StackItem* other)
         {
-            return value;
+          if(!other)
+              return false;
+          if(this->typeId() == other.typeId()) {
+              Array* a = (Array*) other;
+              return value == a->value;
+          }
+          else
+              return false;
         }
 
-        public override byte[] GetByteArray()
+        std::vector<StackItem*> GetArray()
         {
-            return value ? TRUE : FALSE;
+            return _array;
+        }
+
+        BigInteger GetBigInteger()
+        {
+            //throw new NotSupportedException();
+            return BigInteger.Zero();
+        }
+
+        bool GetBoolean()
+        {
+            return _array.size() > 0;
+        }
+
+        std::vector<byte> GetByteArray()
+        {
+            //throw new NotSupportedException();
+            return std::vector<byte>(0);
         }
     };
 }

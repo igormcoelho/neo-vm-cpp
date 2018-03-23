@@ -15,7 +15,7 @@ namespace vm
     public:
         //virtual int typeId() = 0;
         virtual int typeId() {
-          return 0; // TODO: fix
+          return -1; // TODO: fix
         }
 
         virtual bool IsArray() {
