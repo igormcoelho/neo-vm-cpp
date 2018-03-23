@@ -5,11 +5,13 @@
 #include "BigInteger.hpp"
 #include "IInteropInterface.hpp"
 
-class Boolean;
-class Array;
 
 namespace vm
 {
+  class Boolean;
+  class Array;
+  class Struct;
+
     class StackItem
     {
     public:

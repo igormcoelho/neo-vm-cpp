@@ -10,7 +10,7 @@ namespace vm
     {
     private:
         std::vector<T> list;
-        
+
     public:
         RandomAccessStack() {
         }
@@ -27,7 +27,7 @@ namespace vm
         void Insert(int index, T item)
         {
             //if (index > list.size()) throw new InvalidOperationException();
-            list.Insert(list.begin()+list.size() - index, item);
+            list.insert(list.begin()+list.size() - index, item);
         }
 
         T Peek(int index = 0)
@@ -46,11 +46,17 @@ namespace vm
             list.push_back(item);
         }
 
+        void Push(std::vector<T> items)
+        {
+            for(unsigned i=0; i < items.size(); i++)
+              Push(items[i]);
+        }
+
         T Remove(int index)
         {
             //if (index >= list.size()) throw new InvalidOperationException();
             T item = list[list.size() - index - 1];
-            list.RemoveAt(list.size() - index - 1);
+            list.erase(list.begin()+list.size() - index - 1);
             return item;
         }
 

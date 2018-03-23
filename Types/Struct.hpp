@@ -1,5 +1,5 @@
-#ifndef BOOLEAN_HPP
-#define BOOLEAN_HPP
+#ifndef STRUCT_HPP
+#define STRUCT_HPP
 
 #include "../StackItem.hpp"
 #include "../Basic.hpp"
@@ -7,33 +7,29 @@
 
 namespace vm
 {
-    class Boolean : public StackItem
+    class Struct : public StackItem
     {
     private:
-        static const std::vector<byte> TRUE() {
-          return std::vector<byte>(1,1);
-        }
-
-        static const std::vector<byte> FALSE() {
-          return std::vector<byte>(0);
-        }
-
         bool value;
 
     public:
         virtual int typeId() {
-          return 1;
+          return 5;
         }
 
-        Boolean(bool value) {
+        Struct(bool value) {
             this->value = value;
+        }
+
+        Struct(std::vector<StackItem*> v) {
+          
         }
 
         bool Equals(StackItem* other) {
             if(!other)
                 return false;
             if(this->typeId() == other->typeId()) {
-                Boolean* b = (Boolean*) other;
+                Struct* b = (Struct*) other;
                 return value == b->value;
             }
             else
@@ -49,7 +45,11 @@ namespace vm
         }
 
         std::vector<byte> GetByteArray() {
-            return value ? TRUE() : FALSE();
+            return std::vector<byte>(0);//value ? TRUE() : FALSE();
+        }
+
+        StackItem* Clone() {
+          return this;
         }
     };
 }

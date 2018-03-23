@@ -5,7 +5,7 @@
 
 namespace vm
 {
-    class Array : StackItem
+    class Array : public StackItem
     {
     public:
         std::vector<StackItem*> _array;
@@ -27,9 +27,9 @@ namespace vm
         {
           if(!other)
               return false;
-          if(this->typeId() == other.typeId()) {
+          if(this->typeId() == other->typeId()) {
               Array* a = (Array*) other;
-              return value == a->value;
+              return _array == a->_array;
           }
           else
               return false;
@@ -43,7 +43,7 @@ namespace vm
         BigInteger GetBigInteger()
         {
             //throw new NotSupportedException();
-            return BigInteger.Zero();
+            return BigInteger::Zero();
         }
 
         bool GetBoolean()

@@ -8,13 +8,33 @@
 
 namespace vm
 {
-    class ByteArray : StackItem
+    class ByteArray : public StackItem
     {
     public:
         std::vector<byte> value;
 
         virtual int typeId() {
           return 2;
+        }
+
+        ByteArray()
+        {
+          // empty
+        }
+
+        ByteArray(byte bvalue)
+        {
+            this->value = std::vector<byte>(1,bvalue);
+        }
+
+        ByteArray(BigInteger big)
+        {
+            this->value = big.ToByteArray();
+        }
+
+        ByteArray(int ivalue)
+        {
+            this->value = std::vector<byte>(1,ivalue);
         }
 
         ByteArray(std::vector<byte> value)
@@ -33,6 +53,7 @@ namespace vm
         {
             return value;
         }
+
     };
 }
 

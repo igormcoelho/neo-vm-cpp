@@ -9,7 +9,7 @@
 
 namespace vm
 {
-    class Integer : StackItem
+    class Integer : public StackItem
     {
     private:
         BigInteger value;
@@ -27,7 +27,7 @@ namespace vm
             if(!other) {
                 return false;
             }
-            if(this->typeId() == other.typeId()) {
+            if(this->typeId() == other->typeId()) {
                 Integer* i = (Integer*) other;
                 return value == i->value;
             }
